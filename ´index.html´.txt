@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador de Treinos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+        nav {
+            text-align: center;
+            background-color: #444;
+            padding: 0.5em 0;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 1em;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input, form textarea {
+            margin: 0.5em 0;
+            padding: 0.5em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            padding: 0.7em;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        form button:hover {
+            background-color: #555;
+        }
+        .item {
+            padding: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        .item button {
+            background-color: #e74c3c;
+            margin-left: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Organizador de Treinos</h1>
+    </header>
+    <nav>
+        <a href="#treinos">Treinos</a>
+        <a href="#anotacoes">Anotações</a>
+        <a href="#contato">Contato</a>
+    </nav>
+    <div class="container">
+        <section id="treinos">
+            <h2>Adicionar Treino</h2>
+            <form id="treinoForm">
+                <input type="text" id="treinoNome" placeholder="Nome do Treino" required>
+                <textarea id="treinoDescricao" placeholder="Descrição do Treino" required></textarea>
+                <button type="submit">Adicionar</button>
+            </form>
+            <h2>Meus Treinos</h2>
+            <div id="treinoList"></div>
+        </section>
+        <section id="anotacoes">
+            <h2>Adicionar Anotação</h2>
+            <form id="anotacaoForm">
+                <textarea id="anotacaoTexto" placeholder="Escreva sua anotação aqui..." required></textarea>
+                <button type="submit">Adicionar</button>
+            </form>
+            <h2>Minhas Anotações</h2>
+            <div id="anotacaoList"></div>
+        </section>
+        <section id="contato">
+            <h2>Contato</h2>
+            <form>
+                <input type="text" placeholder="Seu Nome" required>
+                <input type="email" placeholder="Seu Email" required>
+                <textarea placeholder="Sua Mensagem" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Organizador de Treinos. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.getElementById('treinoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let nome = document.getElementById('treinoNome').value;
+            let descricao = document.getElementById('treinoDescricao').value;
+            let treinoList = document.getElementById('treinoList');
+            let item = document.createElement('div');
+            item.className = 'item';
+            item.innerHTML = <strong>${nome}</strong><p>${descricao}</p><button onclick="this.parentElement.remove()">Remover</button>;
+            treinoList.appendChild(item);
+            this.reset();
+        });
+
+        document.getElementById('anotacaoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let texto = document.getElementById('anotacaoTexto').value;
+            let anotacaoList = document.getElementById('anotacaoList');
+            let item = document.createElement('div');
+            item.className = 'item';
+            item.innerHTML = <p>${texto}</p><button onclick="this.parentElement.remove()">Remover</button>;
+            anotacaoList.appendChild(item);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
